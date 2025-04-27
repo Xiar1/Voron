@@ -267,6 +267,7 @@ Now you can run `~/klippy-env/bin/python ~/klipper/scripts/canbus_query.py can0`
 ![image](https://github.com/user-attachments/assets/2c2ed66b-4e9e-4638-ae21-1f6fa6e7564c)
 ![image](https://github.com/user-attachments/assets/d44ec4ff-f966-4404-8216-7d09d04884d8)
 
+Run `sudo service klipper start` to start klipper and:
 Congratulations! You are now ready to go back to whatever guide you were following before and continue with getting your printer working with a functional CAN bus!
 
 
