@@ -189,7 +189,7 @@ cd ~/katapult
 make menuconfig
 ```
 
-You should now be in the katapult config menu. Depending on your M8P is what these settings should be:
+You should now be in the katapult config menu. Set the options as so:
 
 M5P :
 
@@ -220,7 +220,7 @@ cd ~/klipper
 make menuconfig
 ```
 
-You should now be in the klipper config menu. Depending on your M8P is what these settings should be:
+You should now be in the klipper config menu. Set the options as so:
 
 M5P:
 
