@@ -164,7 +164,7 @@ echo -e "[Match]\nName=can*\n\n[CAN]\nBitRate=1M\n\n[Link]\nRequiredForOnline=no
 cat /etc/systemd/network/25-can.network
 ```
 
-Output should be:
+Output should be: (Ignore the `RestartSec=0.1` like in the screenshot. That has been removed)
 
 ![image](https://github.com/user-attachments/assets/73af34cb-1dbe-4ec9-93b8-6ac046f445af)
 
