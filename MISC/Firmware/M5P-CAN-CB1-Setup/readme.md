@@ -160,7 +160,7 @@ Output should be:
 ![image](https://github.com/user-attachments/assets/c696e6f6-358e-4a06-a0e1-3ba1eaabe4dc)
 
 ```
-echo -e "[Match]\nName=can*\n\n[CAN]\nBitRate=1M\nRestartSec=0.1s\n\n[Link]\nRequiredForOnline=no" | sudo tee /etc/systemd/network/25-can.network > /dev/null
+echo -e "[Match]\nName=can*\n\n[CAN]\nBitRate=1M\n\n[Link]\nRequiredForOnline=no" | sudo tee /etc/systemd/network/25-can.network > /dev/null
 cat /etc/systemd/network/25-can.network
 ```
 
