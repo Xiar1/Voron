@@ -1,0 +1,43 @@
+2025-10-15 04:55:09,359 - DEBUG - ###################################################################################################
+2025-10-15 04:55:09,359 - INFO - Starting firmware flasher...
+2025-10-15 04:55:09,359 - DEBUG - Arguments: {'flash': <FlashMethod.CAN: 'CAN'>, 'branch': 'master'}
+2025-10-15 04:55:09,359 - DEBUG - Loading Config Variables: {'KLIPPY_LOG': '/home/biqu/printer_data/logs/klippy.log', 'KATAPULT_DIR': '/home/biqu/katapult', 'KLIPPER': '/home/biqu/klipper', 'KLIPPY_ENV': '/home/biqu/klippy-env', 'DEV_DIR': '/dev'}
+2025-10-15 04:55:09,359 - DEBUG - Updated Config Variables: {'KLIPPY_LOG': '/home/biqu/printer_data/logs/klippy.log', 'KATAPULT_DIR': '/home/biqu/katapult', 'KLIPPER': '/home/biqu/klipper', 'KLIPPY_ENV': '/home/biqu/klippy-env', 'DEV_DIR': '/dev'}
+2025-10-15 04:55:26,745 - DEBUG - Device Set: e74eb98654dc
+2025-10-15 04:55:36,112 - DEBUG - Bitrate: 1000000
+2025-10-15 04:55:36,114 - INFO - Downloading tarball...
+2025-10-15 04:55:37,344 - INFO - Extracting tarball...
+2025-10-15 04:55:37,430 - DEBUG - Firmware Found: 5.1.0/Survey_Cartographer_CAN_1000000_8kib_offset.bin
+2025-10-15 04:55:37,430 - DEBUG - Firmware Found: 5.0.0/Survey_Cartographer_CAN_1000000_8kib_offset.bin
+2025-10-15 04:55:37,430 - DEBUG - Firmware Set: 5.1.0/Survey_Cartographer_CAN_1000000_8kib_offset.bin
+2025-10-15 04:55:45,115 - DEBUG - Device to Flash: e74eb98654dc
+2025-10-15 04:55:45,115 - DEBUG - Firmware to Flash: 5.1.0/Survey_Cartographer_CAN_1000000_8kib_offset.bin
+2025-10-15 04:55:47,192 - DEBUG - Katapult directory created successfully.
+2025-10-15 04:55:47,192 - DEBUG - Directory exists but is not a Git repository. Cloning the repository...
+2025-10-15 04:55:49,107 - DEBUG - Repository cloned successfully.
+2025-10-15 04:55:49,495 - DEBUG - The repository is up to date.
+2025-10-15 04:55:49,495 - DEBUG - Katapult check passed.
+2025-10-15 04:55:49,585 - DEBUG - b'9786'
+2025-10-15 04:55:49,586 - DEBUG - Connecting to CAN UUID e74eb98654dc on interface can0
+2025-10-15 04:55:49,586 - DEBUG - Sending bootloader jump command...
+2025-10-15 04:55:50,586 - DEBUG - Resetting all bootloader node IDs...
+2025-10-15 04:55:51,587 - DEBUG - Attempting to connect to bootloader
+2025-10-15 04:55:51,589 - DEBUG - Katapult Connected
+2025-10-15 04:55:51,589 - DEBUG - Software Version: ?
+2025-10-15 04:55:51,590 - DEBUG - Protocol Version: 1.0.0
+2025-10-15 04:55:51,590 - DEBUG - Block Size: 64 bytes
+2025-10-15 04:55:51,590 - DEBUG - Application Start: 0x8002000
+2025-10-15 04:55:51,590 - DEBUG - MCU type: stm32f042x6
+2025-10-15 04:55:51,590 - DEBUG - Verifying canbus connection
+2025-10-15 04:55:51,591 - DEBUG - Flashing '/tmp/cartographer-klipper_gp37mt_s/Cartographer3D-cartographer-klipper-07ca934/firmware/v2-v3/survey/5.1.0/Survey_Cartographer_CAN_1000000_8kib_offset.bin'...
+2025-10-15 04:55:51,591 - DEBUG - 
+2025-10-15 04:55:53,940 - DEBUG - [##################################################]
+2025-10-15 04:55:53,941 - DEBUG - 
+2025-10-15 04:55:53,941 - DEBUG - Write complete: 22 pages
+2025-10-15 04:55:53,941 - DEBUG - Verifying (block count = 341)...
+2025-10-15 04:55:53,941 - DEBUG - 
+2025-10-15 04:55:54,790 - DEBUG - [##################################################]
+2025-10-15 04:55:54,790 - DEBUG - 
+2025-10-15 04:55:54,790 - DEBUG - Verification Complete: SHA = 6BEC92BE6A61A54F5630125E45BC124ED69F286C
+2025-10-15 04:55:54,791 - DEBUG - Programming Complete
+2025-10-15 04:55:57,831 - INFO - Firmware flashed successfully to device!

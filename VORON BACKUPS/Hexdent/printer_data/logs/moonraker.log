@@ -1,0 +1,585 @@
+-------------------- Log Start | Thu Dec 11 15:47:45 2025 --------------------
+platform: Linux-6.12.47+rpt-rpi-2712-aarch64-with-glibc2.41
+data_path: /home/biqu/printer_data
+is_default_data_path: False
+config_file: /home/biqu/printer_data/config/moonraker.conf
+backup_config: /home/biqu/printer_data/config/.moonraker.conf.bkp
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: a26174e64d824e88b4f465cd7bfa94fd
+unix_socket_path: /home/biqu/printer_data/comms/moonraker.sock
+structured_logging: False
+software_version: v0.9.3-121-gf2bb93f
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker
+modified_files: []
+unofficial_components: []
+log_file: /home/biqu/printer_data/logs/moonraker.log
+python_version: 3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]
+launch_args: /home/biqu/moonraker-env/bin/python /home/biqu/moonraker/moonraker/moonraker.py -d /home/biqu/printer_data
+msgspec_enabled: True
+uvloop_enabled: True
+
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /home/biqu/printer_data/comms/klippy.sock
+
+[authorization]
+trusted_clients = 
+	192.168.0.0/16
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FC00::/7
+	FE80::/10
+	::1/128
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel = dev
+refresh_interval = 168
+
+[update_manager mainsail]
+path = /home/biqu/mainsail
+repo = mainsail-crew/mainsail
+channel = stable
+type = web
+persistent_files = 
+	config.json
+
+[update_manager mainsail-config]
+managed_services = klipper
+origin = https://github.com/mainsail-crew/mainsail-config.git
+path = /home/biqu/mainsail-config
+primary_branch = master
+type = git_repo
+
+[update_manager cartographer]
+type = git_repo
+path = ~/cartographer-klipper
+channel = stable
+origin = https://github.com/Cartographer3D/cartographer-klipper.git
+is_system_service = False
+managed_services = klipper
+info_tags = 
+	desc=Cartographer Probe
+
+#################################################################
+All Configuration Files:
+/home/biqu/printer_data/config/moonraker.conf
+#################################################################
+Loading Sqlite database provider. Sqlite Version: 3.46.1
+Unsafe Shutdown Count: 0
+
+System Info:
+
+***python***
+  version: (3, 13, 5, 'final', 0)
+  version_string: 3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 64bit
+  processor: aarch64
+  cpu_desc: 
+  serial_number: a540598f8c6797ba
+  hardware_desc: 
+  model: Raspberry Pi Compute Module 5 Lite Rev 1.0
+  total_memory: 2059088
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 6f
+  manufacturer: Unknown
+  oem_id: 0303
+  product_name: SDABC
+  product_revision: 1.0
+  serial_number: aa000d27
+  manufacturer_date: 2/2025
+  capacity: 29.1 GiB
+  total_bytes: 31268536320
+
+***distribution***
+  name: Debian GNU/Linux 13 (trixie)
+  id: debian
+  version: 13
+  version_parts: {'major': '13', 'minor': '', 'build_number': ''}
+  like: 
+  codename: trixie
+  release_info: {}
+  kernel_version: 6.12.47+rpt-rpi-2712
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+Found libcamera Python module, version: v0.5.2+99-bfd68f78
+
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['network-online.target', 'system.slice', '-.mount', 'sysinit.target']
+**After=['network-online.target', 'sysinit.target', 'system.slice', 'systemd-journald.socket', '-.mount', 'basic.target']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/biqu/printer_data/systemd/moonraker.env
+**ExecStart=/home/biqu/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/biqu/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=biqu
+
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['-.mount', 'system.slice', 'sysinit.target']
+**After=['sysinit.target', '-.mount', 'systemd-journald.socket', 'basic.target', 'system.slice', 'network-online.target']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/biqu/printer_data/systemd/klipper.env
+**ExecStart=/home/biqu/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/biqu/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=biqu
+Git Repo moonraker: No warnings detected
+Git Repo klipper: Warnings detected:
+  Unofficial remote url: https://github.com/KalicoCrew/kalico
+  Repo not on official remote/branch, expected: origin/master, detected: origin/bleeding-edge-v2
+  Repo has untracked source files: ['klippy/kinematics/extended_corexy.py']
+Git Repo mainsail-config: No warnings detected
+Git Repo cartographer: No warnings detected
+Klipper Version: v0.12.0-770-g747c2fc9
+2025-12-11 09:47:45,373 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,373 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,373 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,373 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,373 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,373 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,374 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,374 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,374 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,374 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,374 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,374 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,374 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,374 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,374 [runners.py:run()] - A message handler raised an exception: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+Traceback (most recent call last):
+  File "src/dbus_fast/message_bus.py", line 797, in dbus_fast.message_bus.BaseMessageBus._process_message
+  File "/home/biqu/moonraker-env/lib/python3.13/site-packages/dbus_fast/proxy_object.py", line 143, in _message_handler
+    cb_result = handler.fn(*data)
+  File "/home/biqu/moonraker/moonraker/components/update_manager/system_deploy.py", line 394, in _on_package_signal
+    info = PkEnum.Info.from_index(info_code)
+  File "/home/biqu/moonraker/moonraker/thirdparty/packagekit/enums.py", line 41, in from_index
+    return cls(1 << index)
+  File "/usr/lib/python3.13/enum.py", line 726, in __call__
+    return cls.__new__(cls, value)
+           ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3.13/enum.py", line 1201, in __new__
+    ve_exc = ValueError("%r is not a valid %s" % (value, cls.__qualname__))
+                                                  ^^^^^
+ValueError: Exceeds the limit (4300 digits) for integer string conversion; use sys.set_int_max_str_digits() to increase the limit
+2025-12-11 09:47:45,374 [base_deploy.py:log_info()] - PackageKit: Detected 0 package updates:
+
+2025-12-11 09:47:45,439 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker status --porcelain -b) successfully finished
+2025-12-11 09:47:45,444 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker branch --list --no-color) successfully finished
+2025-12-11 09:47:45,453 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker remote get-url origin) successfully finished
+2025-12-11 09:47:49,668 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker fetch origin --prune --progress) successfully finished
+2025-12-11 09:47:49,687 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker merge-base --is-ancestor HEAD origin/master) successfully finished
+2025-12-11 09:47:49,693 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker rev-parse HEAD) successfully finished
+2025-12-11 09:47:49,702 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker describe --always --tags --long --dirty --abbrev=8) successfully finished
+2025-12-11 09:47:49,708 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker rev-parse origin/master) successfully finished
+2025-12-11 09:47:49,717 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker describe origin/master --always --tags --long --abbrev=8) successfully finished
+2025-12-11 09:47:49,723 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker rev-list HEAD..058517b5b443f1c8454ca58810568b93e39ef867 --count) successfully finished
+2025-12-11 09:47:49,730 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker log f2bb93ffc467ed5465d0b4d258f79445c4a120d3..origin/master --format="sha:%H%x1Dauthor:%an%x1Ddate:%ct%x1Dsubject:%s%x1Dmessage:%b%x1E" --max-count=100) successfully finished
+2025-12-11 09:47:49,812 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/moonraker for-each-ref --count=100 --sort='-creatordate' --contains=HEAD --merged=origin/master --format='%(if)%(*objecttype)%(then)%(*objecttype) %(*objectname)%(else)%(objecttype) %(objectname)%(end) %(refname)' 'refs/tags') successfully finished
+2025-12-11 09:47:49,812 [git_deploy.py:log_repo_info()] - Git Repo moonraker Detected:
+Owner: Arksine
+Repository Name: moonraker
+Path: /home/biqu/moonraker
+Remote: origin
+Branch: master
+Remote URL: https://github.com/Arksine/moonraker
+Recovery URL: https://github.com/Arksine/moonraker
+Current Commit SHA: f2bb93ffc467ed5465d0b4d258f79445c4a120d3
+Upstream Commit SHA: 058517b5b443f1c8454ca58810568b93e39ef867
+Current Version: v0.9.3-121-gf2bb93ff
+Upstream Version: v0.9.3-129-g058517b5
+Rollback Commit: f2bb93ffc467ed5465d0b4d258f79445c4a120d3
+Rollback Branch: master
+Rollback Version: v0.9.3-121-gf2bb93ff
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 8
+Diverged: False
+Pinned Commit: None
+2025-12-11 09:47:49,812 [base_deploy.py:log_info()] - Git Repo moonraker: Channel: dev
+2025-12-11 09:47:49,812 [base_deploy.py:log_info()] - Git Repo moonraker: Validity check for git repo passed
+2025-12-11 09:47:49,868 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper status --porcelain -b) successfully finished
+2025-12-11 09:47:49,874 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper branch --list --no-color) successfully finished
+2025-12-11 09:47:49,884 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper remote get-url origin) successfully finished
+2025-12-11 09:47:49,885 [git_deploy.py:_check_moved_origin()] - Git repo klipper: Performing moved origin check - https://github.com/kalicocrew/kalico
+2025-12-11 09:47:53,673 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper fetch origin --prune --progress) successfully finished
+2025-12-11 09:47:53,679 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper merge-base --is-ancestor HEAD origin/bleeding-edge-v2) successfully finished
+2025-12-11 09:47:53,684 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper rev-parse HEAD) successfully finished
+2025-12-11 09:47:53,730 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper describe --always --tags --long --dirty --abbrev=8) successfully finished
+2025-12-11 09:47:53,735 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper rev-parse origin/bleeding-edge-v2) successfully finished
+2025-12-11 09:47:53,780 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper describe origin/bleeding-edge-v2 --always --tags --long --abbrev=8) successfully finished
+2025-12-11 09:47:53,786 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper rev-list HEAD..3cec78b95e6a3384db6d631d91bfa79d2775d160 --count) successfully finished
+2025-12-11 09:47:53,791 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper log 747c2fc9bb2dc90f22678d5c094597aea75b71d4..origin/bleeding-edge-v2 --format="sha:%H%x1Dauthor:%an%x1Ddate:%ct%x1Dsubject:%s%x1Dmessage:%b%x1E" --max-count=100) successfully finished
+2025-12-11 09:47:53,839 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/klipper for-each-ref --count=100 --sort='-creatordate' --contains=HEAD --merged=origin/bleeding-edge-v2 --format='%(if)%(*objecttype)%(then)%(*objecttype) %(*objectname)%(else)%(objecttype) %(objectname)%(end) %(refname)' 'refs/tags') successfully finished
+2025-12-11 09:47:53,839 [git_deploy.py:log_repo_info()] - Git Repo klipper Detected:
+Owner: KalicoCrew
+Repository Name: kalico
+Path: /home/biqu/klipper
+Remote: origin
+Branch: bleeding-edge-v2
+Remote URL: https://github.com/KalicoCrew/kalico
+Recovery URL: https://github.com/KalicoCrew/kalico
+Current Commit SHA: 747c2fc9bb2dc90f22678d5c094597aea75b71d4
+Upstream Commit SHA: 3cec78b95e6a3384db6d631d91bfa79d2775d160
+Current Version: v0.12.0-770-g747c2fc9
+Upstream Version: v0.12.0-772-g3cec78b9
+Rollback Commit: d55baaf2654e989aac570d47910ca9434ec5814a
+Rollback Branch: master
+Rollback Version: v0.13.0-330-gd55baaf2
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 2
+Diverged: False
+Pinned Commit: None
+Repo Warnings:
+  Unofficial remote url: https://github.com/KalicoCrew/kalico
+  Repo not on official remote/branch, expected: origin/master, detected: origin/bleeding-edge-v2
+  Repo has untracked source files: ['klippy/kinematics/extended_corexy.py']
+2025-12-11 09:47:53,839 [base_deploy.py:log_info()] - Git Repo klipper: Channel: dev
+2025-12-11 09:47:53,839 [base_deploy.py:log_info()] - Git Repo klipper: Validity check for git repo passed
+2025-12-11 09:47:54,191 [base_deploy.py:log_info()] - Web Client mainsail: Detected
+Repo: mainsail-crew/mainsail
+Channel: stable
+Path: /home/biqu/mainsail
+Local Version: v2.14.0
+Remote Version: v2.15.0
+Valid: True
+Fallback Detected: False
+Pre-release: False
+Download Url: https://github.com/mainsail-crew/mainsail/releases/download/v2.15.0/mainsail.zip
+Download Size: 2992437
+Content Type: application/zip
+Rollback Version: v2.14.0
+Rollback Repo: mainsail-crew/mainsail
+2025-12-11 09:47:54,422 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/mainsail-config status --porcelain -b) successfully finished
+2025-12-11 09:47:54,427 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/mainsail-config branch --list --no-color) successfully finished
+2025-12-11 09:47:54,437 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/mainsail-config remote get-url origin) successfully finished
+2025-12-11 09:47:54,818 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/mainsail-config fetch origin --prune --progress) successfully finished
+2025-12-11 09:47:54,823 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/mainsail-config merge-base --is-ancestor HEAD origin/master) successfully finished
+2025-12-11 09:47:54,828 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/mainsail-config rev-parse HEAD) successfully finished
+2025-12-11 09:47:54,834 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/mainsail-config describe --always --tags --long --dirty --abbrev=8) successfully finished
+2025-12-11 09:47:54,838 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/mainsail-config rev-parse origin/master) successfully finished
+2025-12-11 09:47:54,844 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/mainsail-config describe origin/master --always --tags --long --abbrev=8) successfully finished
+2025-12-11 09:47:54,849 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/mainsail-config rev-list HEAD..ff3869a621db17ce3ef660adbbd3fa321995ac42 --count) successfully finished
+2025-12-11 09:47:54,849 [git_deploy.py:log_repo_info()] - Git Repo mainsail-config Detected:
+Owner: mainsail-crew
+Repository Name: mainsail-config
+Path: /home/biqu/mainsail-config
+Remote: origin
+Branch: master
+Remote URL: https://github.com/mainsail-crew/mainsail-config.git
+Recovery URL: https://github.com/mainsail-crew/mainsail-config.git
+Current Commit SHA: ff3869a621db17ce3ef660adbbd3fa321995ac42
+Upstream Commit SHA: ff3869a621db17ce3ef660adbbd3fa321995ac42
+Current Version: v1.2.1-1-gff3869a6
+Upstream Version: v1.2.1-1-gff3869a6
+Rollback Commit: ff3869a621db17ce3ef660adbbd3fa321995ac42
+Rollback Branch: master
+Rollback Version: v1.2.1-1-gff3869a6
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+Pinned Commit: None
+2025-12-11 09:47:54,849 [base_deploy.py:log_info()] - Git Repo mainsail-config: Channel: dev
+2025-12-11 09:47:54,849 [base_deploy.py:log_info()] - Git Repo mainsail-config: Validity check for git repo passed
+2025-12-11 09:47:55,418 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/cartographer-klipper status --porcelain -b) successfully finished
+2025-12-11 09:47:55,423 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/cartographer-klipper branch --list --no-color) successfully finished
+2025-12-11 09:47:55,433 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/cartographer-klipper remote get-url origin) successfully finished
+2025-12-11 09:47:55,954 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/cartographer-klipper fetch origin --prune --progress) successfully finished
+2025-12-11 09:47:55,959 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/cartographer-klipper merge-base --is-ancestor HEAD origin/master) successfully finished
+2025-12-11 09:47:55,964 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/cartographer-klipper rev-parse HEAD) successfully finished
+2025-12-11 09:47:55,970 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/cartographer-klipper describe --always --tags --long --dirty --abbrev=8) successfully finished
+2025-12-11 09:47:56,047 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/cartographer-klipper for-each-ref --count=100 --sort='-creatordate' --contains=HEAD --merged=origin/master --format='%(if)%(*objecttype)%(then)%(*objecttype) %(*objectname)%(else)%(objecttype) %(objectname)%(end) %(refname)' 'refs/tags') successfully finished
+2025-12-11 09:47:56,053 [shell_command.py:_check_proc_success()] - Command (git -C /home/biqu/cartographer-klipper rev-list HEAD..07ca934e05b15cc1294843fb84bf01d3fa6644c3 --count) successfully finished
+2025-12-11 09:47:56,053 [git_deploy.py:log_repo_info()] - Git Repo cartographer Detected:
+Owner: Cartographer3D
+Repository Name: cartographer-klipper
+Path: /home/biqu/cartographer-klipper
+Remote: origin
+Branch: master
+Remote URL: https://github.com/Cartographer3D/cartographer-klipper.git
+Recovery URL: https://github.com/Cartographer3D/cartographer-klipper.git
+Current Commit SHA: 07ca934e05b15cc1294843fb84bf01d3fa6644c3
+Upstream Commit SHA: 07ca934e05b15cc1294843fb84bf01d3fa6644c3
+Current Version: v1.2.3-0-g07ca934e
+Upstream Version: v1.2.3
+Rollback Commit: 07ca934e05b15cc1294843fb84bf01d3fa6644c3
+Rollback Branch: master
+Rollback Version: v1.2.3-0-g07ca934e
+Is Dirty: False
+Is Detached: False
+Is Shallow: False
+Commits Behind Count: 0
+Diverged: False
+Pinned Commit: None
+2025-12-11 09:47:56,053 [base_deploy.py:log_info()] - Git Repo cartographer: Channel: stable
+2025-12-11 09:47:56,053 [base_deploy.py:log_info()] - Git Repo cartographer: Validity check for git repo passed
